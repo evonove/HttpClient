@@ -355,6 +355,7 @@ public:
     // Note: 1st call to these indicates the user is sending the body, so if need
     // Note: be we should finish the header first
     virtual size_t write(uint8_t aByte) { if (iState < eRequestSent) { finishHeaders(); }; return iClient-> write(aByte); };
+    virtual size_t write(String aData) { if (iState < eRequestSent) { finishHeaders(); }; return iClient->println(aData); };
     virtual size_t write(const uint8_t *aBuffer, size_t aSize) { if (iState < eRequestSent) { finishHeaders(); }; return iClient->write(aBuffer, aSize); };
     // Inherited from Stream
     virtual int available() { return iClient->available(); };
